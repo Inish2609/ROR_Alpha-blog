@@ -2,7 +2,7 @@
 <% @articles.each do |a| %>
     <div class="card text-center">
     <div class="card-header">
-        By Inish Raj
+        <%= a.user.username %>
     </div>
     <div class="card-body">
         <h5 class="card-title"><%= a.title %></h5>
