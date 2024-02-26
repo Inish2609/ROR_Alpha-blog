@@ -13,9 +13,10 @@
   </head>
 
   <body>
+    <%= render 'layouts/navbar' %>
     <% flash.each do |key,msg| %>
       <%= msg %>
     <% end %>
     <%= yield %>
-  </body>
+</body>
 </html>
