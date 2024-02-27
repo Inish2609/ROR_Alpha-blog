@@ -2,7 +2,7 @@
 <% @articles.each do |a| %>
     <div class="card text-center">
     <div class="card-header">
-        <%= a.user.username %>
+        <%=link_to a.user.username,user_path(a.user) %>
     </div>
     <div class="card-body">
         <h5 class="card-title"><%= a.title %></h5>
@@ -12,6 +12,6 @@
         <%= link_to "Delete", article_path(a.id), data: { turbo_method: :delete } ,class:"btn btn-primary"%>
     </div>
     <div class="card-footer text-body-secondary">
-        Created At : <%= a.created_at %>    </div>
+        Created At : <%= time_ago_in_words(a.created_at) %> ago    </div>
     </div>
 <% end %>   

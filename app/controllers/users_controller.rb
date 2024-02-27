@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(params.require(:users).permit(:username,:email,:password,:avatar))
     if @user.save
       flash[:notice]  = "Hello #{@user.username} !!!"
-      redirect_to articles_path
+      redirect_to user_path(@user)
     else
       redirect_to '/signup'
     end
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(params.require(:user).permit(:username,:email,:password,:avatar))
       flash[:notice] = "Your Profile was Updated Successfully"
-      redirect_to articles_path
+      redirect_to user_path(@user)
     else
       redirect_to '/edit'
     end
