@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params.require(:users).permit(:username,:email,:password,:avatar))
     if @user.save
+      session[:user_id] = @user.id
       flash[:notice]  = "Hello #{@user.username} !!!"
       redirect_to user_path(@user)
     else
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.paginate(page:params[:page],per_page:3)
   end
 
 end

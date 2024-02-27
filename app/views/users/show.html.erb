@@ -1,14 +1,18 @@
 <h1><%= @user.username %>'s Profile</h1>
-<%= image_tag @user.avatar, style: "min-width: 500px; max-height: 500px; align-item:center;justify-content:center;" if @user.avatar.attached? %>
-<div>
-    <%= link_to 'Edit Profile',edit_user_path(@user),class:"btn btn-primary" %>
-</div>
+<%= image_tag @user.avatar, style: "min-width: 500px; max-height: 500px;" if @user.avatar.attached? %>
+<% if logged_in? && @user == current_user %>
+    <div>
+        <%= link_to 'Edit Profile',edit_user_path(@user),class:"btn btn-primary" %>
+    </div>
+<% end %>
 <% @user.articles.each do |a| %>
     <div>
         <h2><%= a.title %></h2>
         <p><%= a.description %></p>
         <%= link_to 'Show',article_path(a),class:"btn btn-primary" %>
-        <%= link_to 'Edit', edit_article_path(a),class:"btn btn-primary" %>
-        <%= link_to "Delete", article_path(a.id), data: { turbo_method: :delete } ,class:"btn btn-primary"%>
+        <% if logged_in? && @user == current_user %>
+            <%= link_to 'Edit', edit_article_path(a),class:"btn btn-primary" %>
+            <%= link_to "Delete", article_path(a.id), data: { turbo_method: :delete } ,class:"btn btn-primary"%>
+        <% end %>
     </div>
 <% end %>
