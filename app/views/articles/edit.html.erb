@@ -7,7 +7,7 @@
         <% end %>
     </ul>
 <% end %>
-<%= form_with(model: @article,local: true,method: :patch) do |f| %>
+<%= form_with(model: @article,url:article_path(@article),local: true,method: :patch) do |f| %>
     <p>
         <%= f.label :title %><br/>
         <%= f.text_field :title %>
