@@ -3,7 +3,7 @@
 <p>Description : <%= @article.description %>
 <div>
     <%= image_tag @article.user.avatar, style: "min-width: 500px; max-height: 500px;" %>
-    <% if logged_in? && @article.user == current_user %>
+    <% if logged_in? && (@article.user == current_user || current_user.admin?) %>
         <%= link_to 'Edit',edit_article_path(@article) %> |
         <%= link_to 'Delete',article_path(@article),data:{turbo_method: :delete,turbo_confirm: "Are you Sure?"} %> |
     <% end %>

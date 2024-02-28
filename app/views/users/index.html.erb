@@ -5,8 +5,13 @@
         <p><%= user.username %></p>
         <%= image_tag user.avatar , style: "min-width: 500px; max-height: 500px;" if user.avatar.attached? %>
         <%= link_to 'View Profile',user_path(user) %>
-        <% if logged_in? && user == current_user %>
-            <%= link_to 'Edit Profile',edit_user_path(user) %>
+        <% if logged_in? %>
+            <% if user == current_user %>
+                <%= link_to 'Edit Profile',edit_user_path(user) %>
+            <% end %>
+            <% if current_user.admin %>
+                <%= link_to "Delete Profile",user_path(user),data:{turbo_method: :delete,turbo_confirm:"Are U Sure"} %>
+            <% end %>
         <% end %>
     </div>
 <% end %>
